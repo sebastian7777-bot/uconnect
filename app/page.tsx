@@ -1,26 +1,22 @@
-import Navbar from '@/components/ui/Navbar'
-import Footer from '@/components/ui/Footer'
-import Hero from '@/components/sections/Hero'
-import ElProblema from '@/components/sections/ElProblema'
-import QueEs from '@/components/sections/QueEs'
-import ComoFunciona from '@/components/sections/ComoFunciona'
-import ParaQuien from '@/components/sections/ParaQuien'
-import PorQueAhora from '@/components/sections/PorQueAhora'
-import QuienesSomos from '@/components/sections/QuienesSomos'
-import Formulario from '@/components/sections/Formulario'
+import Navbar        from '@/components/Navbar'
+import Footer        from '@/components/Footer'
+import ClientShell   from '@/components/ClientShell'
+import Organizadores from '@/components/sections/Organizadores'
+import Manifiesto    from '@/components/sections/Manifiesto'
+import LosTreinta    from '@/components/sections/LosTreinta'
+import Equipo        from '@/components/sections/Equipo'
+import Formulario    from '@/components/sections/Formulario'
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <main>
-        <Hero />
-        <ElProblema />
-        <QueEs />
-        <ComoFunciona />
-        <ParaQuien />
-        <PorQueAhora />
-        <QuienesSomos />
+        <ClientShell />
+        <Organizadores />
+        <Manifiesto />
+        <LosTreinta />
+        <Equipo />
         <Formulario />
       </main>
       <Footer />

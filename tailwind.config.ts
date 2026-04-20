@@ -9,27 +9,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: {
-          primary: '#000000',
+        uc: {
+          black:   '#000000',
           surface: '#0F0F0F',
-          card: '#141414',
-          elevated: '#1A1A1A',
-        },
-        border: {
-          subtle: '#222222',
-          DEFAULT: '#2A2A2A',
-        },
-        txt: {
-          primary: '#FFFFFF',
-          secondary: '#999999',
-          muted: '#555555',
-          accent: '#E8E8E8',
-          mid: '#AAAAAA',
+          card:    '#141414',
+          border:  '#1E1E1E',
+          white:   '#FFFFFF',
+          sec:     '#999999',
+          muted:   '#555555',
+          blue:    '#3B82F6',
+          'blue-glow': 'rgba(59,130,246,0.12)',
         },
       },
       fontFamily: {
         display: ['var(--font-display)', 'Plus Jakarta Sans', 'sans-serif'],
-        body: ['var(--font-body)', 'Space Grotesk', 'sans-serif'],
+        body:    ['var(--font-body)',    'Space Grotesk',    'sans-serif'],
       },
     },
   },

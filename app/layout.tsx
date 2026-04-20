@@ -18,34 +18,28 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://uconnect.co'),
-  title: 'UConnect — Conoce a las personas correctas',
-  description: 'Infraestructura social para eventos. Solo 30 cupos en Medellín.',
+  title: 'UConnect — Conectamos personas reales en el mundo real',
+  description: '30 cupos. Prelanzamiento cerrado. La infraestructura de conexión presencial que Colombia no tenía todavía.',
   openGraph: {
-    title: 'UConnect — Conoce a las personas correctas',
-    description: 'Infraestructura social para eventos. Solo 30 cupos en Medellín.',
+    title: 'UConnect — Conectamos personas reales en el mundo real',
+    description: '30 cupos. Prelanzamiento cerrado. La infraestructura de conexión presencial que Colombia no tenía todavía.',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    url: 'https://uconnect.co',
     locale: 'es_CO',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'UConnect — Conoce a las personas correctas',
-    description: 'Infraestructura social para eventos. Solo 30 cupos en Medellín.',
+    title: 'UConnect — Conectamos personas reales en el mundo real',
+    description: '30 cupos. Prelanzamiento cerrado.',
     images: ['/og-image.png'],
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${plusJakarta.variable} ${spaceGrotesk.variable}`}>
-      <body
-        className="antialiased bg-black text-white"
-        style={{ fontFamily: 'var(--font-body, Space Grotesk, sans-serif)' }}
-      >
+      <body className="antialiased bg-black text-white font-body">
         {children}
       </body>
     </html>
