@@ -4,122 +4,181 @@ import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 function CountUp({ target }: { target: number }) {
-  const ref    = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, amount: 0.5 })
+  const ref      = useRef<HTMLSpanElement>(null)
   const [count, setCount] = useState(0)
+  const animated = useRef(false)
 
   useEffect(() => {
-    if (!inView) return
-    const start = performance.now()
-    const dur   = 1200
-    const tick  = (now: number) => {
-      const p = Math.min((now - start) / dur, 1)
-      setCount(Math.round((1 - Math.pow(1 - p, 3)) * target))
-      if (p < 1) requestAnimationFrame(tick)
-    }
-    requestAnimationFrame(tick)
-  }, [inView, target])
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !animated.current) {
+        animated.current = true
+        const start = Date.now()
+        const dur   = 1500
+        const tick  = () => {
+          const p  = Math.min((Date.now() - start) / dur, 1)
+          const v  = 1 - Math.pow(1 - p, 3)
+          setCount(Math.floor(v * target))
+          if (p < 1) requestAnimationFrame(tick)
+          else setCount(target)
+        }
+        requestAnimationFrame(tick)
+      }
+    }, { threshold: 0.3 })
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [target])
 
   return <span ref={ref}>{count}</span>
 }
 
-function ProgressBar({ pct }: { pct: number }) {
-  const ref    = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, amount: 0.5 })
-
-  return (
-    <div ref={ref} className="w-full max-w-[400px] mx-auto flex flex-col gap-3">
-      <div className="flex justify-between text-[0.8rem] font-body text-[#555]">
-        <span>Primera fase</span>
-        <span>30 cupos</span>
-      </div>
-      <div className="w-full h-1.5 bg-[#141414] rounded-full overflow-hidden">
-        <motion.div
-          className="h-full bg-[#3B82F6] rounded-full"
-          initial={{ width: '0%' }}
-          animate={inView ? { width: `${pct}%` } : { width: '0%' }}
-          transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1], delay: 0.3 }}
-        />
-      </div>
-    </div>
-  )
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show:   { opacity: 1, y: 0 },
 }
 
 export default function LosTreinta() {
+  const progressRef = useRef<HTMLDivElement>(null)
+  const inView      = useInView(progressRef, { once: true, margin: '-12%' })
+
   return (
-    <section className="py-28 px-6 bg-[#080808]">
-      <div className="max-w-2xl mx-auto flex flex-col items-center gap-8 text-center">
+    <section
+      style={{ position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+      className="py-24 px-6"
+    >
+      <div style={{ maxWidth: '700px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0', textAlign: 'center' }}>
 
         <motion.div
-          initial={{ opacity: 0, y: 28 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-8%' }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-12%' }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-          <h2
-            className="font-display font-black text-white leading-none"
-            style={{ fontSize: 'clamp(5rem, 12vw, 9rem)' }}
-          >
-            <CountUp target={30} />.
-          </h2>
-          <p className="font-body text-[#555] text-[1.2rem] mt-2">No más.</p>
+          <p className="font-display" style={{ fontWeight: 900, color: '#FFF', lineHeight: 1, fontSize: 'clamp(6rem, 12vw, 10rem)', margin: 0 }}>
+            <CountUp target={30} />
+          </p>
+          <p className="font-body" style={{ color: '#333', fontSize: '1rem', marginTop: '4px', marginBottom: 0 }}>
+            cupos. No más.
+          </p>
         </motion.div>
 
-        <div className="flex flex-col gap-4 max-w-[500px]">
-          {[
-            'Estamos construyendo algo desde cero — con integridad, con datos reales y con las personas correctas.',
-            'Treinta personas en Medellín que van a crear la primera red de conexiones intencionales de Colombia.',
-          ].map((text, i) => (
-            <motion.p
-              key={i}
-              className="font-body text-[#888] text-[1rem] leading-[1.9]"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-8%' }}
-              transition={{ duration: 0.75, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {text}
-            </motion.p>
-          ))}
-
-          <motion.p
-            className="font-body italic text-[#444] text-[0.8rem] mt-2"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-8%' }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            ¿Por qué 30 y no miles?
-            En una red, todo empieza desde un punto.
-            Si entras, UConnect empieza desde ti.
-          </motion.p>
-        </div>
-
-        <div className="w-full h-px bg-[#1A1A1A]" />
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-12%' }}
+          transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="font-body"
+          style={{ color: '#777', fontSize: '1rem', lineHeight: 1.9, maxWidth: '480px', marginTop: '32px', marginBottom: 0 }}
+        >
+          Estamos construyendo algo desde cero —<br />
+          con integridad, con datos reales<br />
+          y con las personas correctas.<br />
+          <br />
+          Treinta personas en Medellín que van a crear
+          la primera red de conexiones intencionales
+          de Colombia.
+        </motion.p>
 
         <motion.p
-          className="font-display font-bold text-white text-[1.3rem] leading-[1.4] max-w-md"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-8%' }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-12%' }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="font-body"
+          style={{ color: '#333', fontSize: '0.8rem', fontStyle: 'italic', marginTop: '16px', marginBottom: 0 }}
         >
-          Si entras, no eres un usuario.
+          ¿Por qué 30 y no miles?<br />
+          En una red, todo empieza desde un punto.<br />
+          Si entras, UConnect empieza desde ti.
+        </motion.p>
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-12%' }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          style={{ width: '200px', height: '1px', background: '#1A1A1A', margin: '32px 0' }}
+        />
+
+        <motion.p
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-12%' }}
+          transition={{ duration: 0.75, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display"
+          style={{ fontWeight: 700, color: '#FFF', fontSize: '1.4rem', lineHeight: 1.4, margin: 0 }}
+        >
+          Si entras, no eres un usuario.<br />
           Eres parte de lo que UConnect es.
         </motion.p>
 
-        <ProgressBar pct={18} />
-
-        <motion.a
-          href="#formulario"
-          className="inline-flex items-center justify-center px-10 py-4 bg-white text-black font-body font-bold text-[1rem] rounded-xl transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_8px_32px_rgba(255,255,255,0.1)]"
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-8%' }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        {/* Progress bar */}
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-12%' }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          style={{ width: '100%', maxWidth: '360px', marginTop: '32px' }}
+          ref={progressRef}
         >
-          Solicitar mi cupo
-        </motion.a>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+            <span className="font-body" style={{ color: '#333', fontSize: '0.75rem' }}>Primera fase</span>
+            <span className="font-body" style={{ color: '#333', fontSize: '0.75rem' }}>30 cupos</span>
+          </div>
+          <div style={{ background: '#141414', borderRadius: '100px', height: '3px', overflow: 'hidden' }}>
+            <motion.div
+              style={{ height: '100%', background: '#3B82F6', borderRadius: '100px' }}
+              initial={{ width: '0%' }}
+              animate={inView ? { width: '18%' } : { width: '0%' }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+            />
+          </div>
+        </motion.div>
+
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-12%' }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          style={{ marginTop: '32px' }}
+        >
+          <a
+            href="#formulario"
+            className="font-body"
+            style={{
+              display:        'inline-flex',
+              alignItems:     'center',
+              justifyContent: 'center',
+              padding:        '14px 32px',
+              background:     '#FFF',
+              color:          '#000',
+              fontWeight:     700,
+              fontSize:       '0.95rem',
+              borderRadius:   '10px',
+              textDecoration: 'none',
+              transition:     'all 0.2s ease',
+            }}
+            onMouseEnter={e => {
+              const el = e.currentTarget
+              el.style.background = '#E8E8E8'
+              el.style.transform  = 'translateY(-2px)'
+            }}
+            onMouseLeave={e => {
+              const el = e.currentTarget
+              el.style.background = '#FFF'
+              el.style.transform  = 'translateY(0)'
+            }}
+          >
+            Solicitar mi cupo
+          </a>
+        </motion.div>
+
       </div>
     </section>
   )

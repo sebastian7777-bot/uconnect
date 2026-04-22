@@ -8,5 +8,5 @@ export interface FormData {
 
 export interface FormState {
   status: 'idle' | 'loading' | 'success' | 'error'
-  message?: string
+  error?: string
 }

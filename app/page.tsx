@@ -1,25 +1,29 @@
-import Navbar        from '@/components/Navbar'
-import Footer        from '@/components/Footer'
-import ClientShell   from '@/components/ClientShell'
-import Organizadores from '@/components/sections/Organizadores'
-import Manifiesto    from '@/components/sections/Manifiesto'
+import Navbar       from '@/components/Navbar'
+import BackgroundWrapper from '@/components/BackgroundWrapper'
+import Hero          from '@/components/sections/Hero'
+import ElDolor       from '@/components/sections/ElDolor'
+import ComoFunciona  from '@/components/sections/ComoFunciona'
+import LaDiferencia  from '@/components/sections/LaDiferencia'
 import LosTreinta    from '@/components/sections/LosTreinta'
+import Manifiesto    from '@/components/sections/Manifiesto'
 import Equipo        from '@/components/sections/Equipo'
 import Formulario    from '@/components/sections/Formulario'
 
 export default function Home() {
   return (
     <>
+      <BackgroundWrapper />
       <Navbar />
       <main>
-        <ClientShell />
-        <Organizadores />
-        <Manifiesto />
+        <Hero />
+        <ElDolor />
+        <ComoFunciona />
+        <LaDiferencia />
         <LosTreinta />
+        <Manifiesto />
         <Equipo />
         <Formulario />
       </main>
-      <Footer />
     </>
   )
 }
