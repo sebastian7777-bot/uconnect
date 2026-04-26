@@ -71,7 +71,11 @@ export default function Formulario() {
       const res = await fetch(`https://formspree.io/f/${id}`, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body:    JSON.stringify(form),
+        body:    JSON.stringify({
+          ...form,
+          _replyto: form.email,
+          _subject: 'Nueva solicitud — UConnect Prelanzamiento',
+        }),
       })
       setState(res.ok ? { status: 'success' } : { status: 'error', error: 'Algo salió mal. Intenta de nuevo.' })
     } catch {
@@ -182,6 +186,8 @@ export default function Formulario() {
                 onSubmit={handleSubmit}
                 style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
               >
+                <input type="hidden" name="_replyto" value="amazonono200@gmail.com"/>
+                <input type="hidden" name="_subject" value="Nueva solicitud — UConnect Prelanzamiento"/>
                 {/* Nombre */}
                 <div>
                   <label style={labelStyle}>Nombre completo</label>
