@@ -1,32 +1,31 @@
 'use client'
 
-import { useState, ChangeEvent, FormEvent } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import type { FormData, FormState } from '@/types'
 
 const MAX = 200
 
 const inputStyle: React.CSSProperties = {
-  width:           '100%',
-  background:      '#050505',
-  border:          '1px solid #1E1E1E',
-  color:           '#FFF',
-  borderRadius:    '10px',
-  padding:         '14px 16px',
-  fontSize:        '0.95rem',
-  fontFamily:      'var(--font-body, sans-serif)',
-  outline:         'none',
-  transition:      'border-color 150ms, box-shadow 150ms',
-  boxSizing:       'border-box',
+  width:        '100%',
+  background:   '#050505',
+  border:       '1px solid #1E1E1E',
+  color:        '#FFF',
+  borderRadius: '10px',
+  padding:      '14px 16px',
+  fontSize:     '0.95rem',
+  fontFamily:   'var(--font-body, sans-serif)',
+  outline:      'none',
+  transition:   'border-color 150ms, box-shadow 150ms',
+  boxSizing:    'border-box',
 }
 
 const labelStyle: React.CSSProperties = {
-  display:     'block',
-  fontFamily:  'var(--font-body, sans-serif)',
-  fontWeight:  500,
-  color:       '#777',
-  fontSize:    '0.82rem',
-  marginBottom:'8px',
+  display:      'block',
+  fontFamily:   'var(--font-body, sans-serif)',
+  fontWeight:   500,
+  color:        '#777',
+  fontSize:     '0.82rem',
+  marginBottom: '8px',
 }
 
 function focusStyle(el: HTMLElement) {
@@ -53,38 +52,43 @@ function Spinner() {
 }
 
 export default function Formulario() {
-  const [form,  setForm]  = useState<FormData>({ nombre: '', email: '', organizacion: '', razon: '', perfil: '' })
-  const [state, setState] = useState<FormState>({ status: 'idle' })
-  const [chars, setChars] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
+  const [error,   setError]   = useState('')
+  const [chars,   setChars]   = useState(0)
 
-  function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
-    const { name, value } = e.target
-    setForm(p => ({ ...p, [name]: value }))
-    if (name === 'razon') setChars(value.length)
-  }
-
-  async function handleSubmit(e: FormEvent) {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setState({ status: 'loading' })
-    const id = process.env.NEXT_PUBLIC_FORMSPREE_ID
+    setLoading(true)
+    setError('')
+
+    const form = e.target as HTMLFormElement
+    const data = new FormData(form)
+
     try {
-      const res = await fetch(`https://formspree.io/f/${id}`, {
+      const res = await fetch('https://formspree.io/f/xpqknjyn', {
         method:  'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body:    JSON.stringify({
-          ...form,
-          _replyto: form.email,
-          _subject: 'Nueva solicitud — UConnect Prelanzamiento',
-        }),
+        body:    data,
+        headers: { Accept: 'application/json' },
       })
-      setState(res.ok ? { status: 'success' } : { status: 'error', error: 'Algo salió mal. Intenta de nuevo.' })
-    } catch {
-      setState({ status: 'error', error: 'Algo salió mal. Intenta de nuevo.' })
+
+      const json = await res.json()
+
+      if (res.ok) {
+        setSuccess(true)
+      } else {
+        console.error('Formspree error:', json)
+        setError(json?.errors?.[0]?.message || 'Algo salió mal. Intenta de nuevo.')
+      }
+    } catch (err) {
+      console.error('Fetch error:', err)
+      setError('Algo salió mal. Intenta de nuevo.')
+    } finally {
+      setLoading(false)
     }
   }
 
   const nearLimit = chars >= MAX - 20
-  const loading   = state.status === 'loading'
 
   const fadeUp = {
     hidden: { opacity: 0, y: 28 },
@@ -158,7 +162,7 @@ export default function Formulario() {
           }}
         >
           <AnimatePresence mode="wait">
-            {state.status === 'success' ? (
+            {success ? (
               <motion.div
                 key="ok"
                 initial={{ opacity: 0, y: 16 }}
@@ -186,15 +190,15 @@ export default function Formulario() {
                 onSubmit={handleSubmit}
                 style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}
               >
-                <input type="hidden" name="_replyto" value="amazonono200@gmail.com"/>
-                <input type="hidden" name="_subject" value="Nueva solicitud — UConnect Prelanzamiento"/>
+                <input type="hidden" name="_replyto"  value="amazonono200@gmail.com"/>
+                <input type="hidden" name="_subject"  value="Nueva solicitud — UConnect Prelanzamiento"/>
+
                 {/* Nombre */}
                 <div>
                   <label style={labelStyle}>Nombre completo</label>
                   <input
                     type="text" name="nombre" required
                     placeholder="Tu nombre completo"
-                    value={form.nombre} onChange={handleChange}
                     style={inputStyle}
                     onFocus={e => focusStyle(e.currentTarget)}
                     onBlur={e  => blurStyle(e.currentTarget)}
@@ -207,7 +211,6 @@ export default function Formulario() {
                   <input
                     type="email" name="email" required
                     placeholder="tu@correo.com"
-                    value={form.email} onChange={handleChange}
                     style={inputStyle}
                     onFocus={e => focusStyle(e.currentTarget)}
                     onBlur={e  => blurStyle(e.currentTarget)}
@@ -220,7 +223,6 @@ export default function Formulario() {
                   <input
                     type="text" name="organizacion" required
                     placeholder="EIA, EAFIT, tu empresa..."
-                    value={form.organizacion} onChange={handleChange}
                     style={inputStyle}
                     onFocus={e => focusStyle(e.currentTarget)}
                     onBlur={e  => blurStyle(e.currentTarget)}
@@ -234,7 +236,7 @@ export default function Formulario() {
                     <textarea
                       name="razon" required maxLength={MAX} rows={4}
                       placeholder="Cuéntanos qué te trajo aquí."
-                      value={form.razon} onChange={handleChange}
+                      onChange={e => setChars(e.target.value.length)}
                       style={{ ...inputStyle, resize: 'none' }}
                       onFocus={e => focusStyle(e.currentTarget)}
                       onBlur={e  => blurStyle(e.currentTarget)}
@@ -242,12 +244,12 @@ export default function Formulario() {
                     <span
                       className="font-body"
                       style={{
-                        position:   'absolute',
-                        bottom:     '12px',
-                        right:      '14px',
-                        fontSize:   '0.75rem',
-                        transition: 'color 200ms',
-                        color:      nearLimit ? '#3B82F6' : '#333',
+                        position:      'absolute',
+                        bottom:        '12px',
+                        right:         '14px',
+                        fontSize:      '0.75rem',
+                        transition:    'color 200ms',
+                        color:         nearLimit ? '#3B82F6' : '#333',
                         pointerEvents: 'none',
                       }}
                     >
@@ -261,7 +263,7 @@ export default function Formulario() {
                   <label style={labelStyle}>¿Cómo describes tu perfil?</label>
                   <select
                     name="perfil" required
-                    value={form.perfil} onChange={handleChange}
+                    defaultValue=""
                     style={{ ...inputStyle, appearance: 'none', cursor: 'pointer' }}
                     onFocus={e => focusStyle(e.currentTarget)}
                     onBlur={e  => blurStyle(e.currentTarget)}
@@ -274,9 +276,9 @@ export default function Formulario() {
                   </select>
                 </div>
 
-                {state.status === 'error' && (
+                {error && (
                   <p className="font-body" style={{ color: '#EF4444', fontSize: '0.85rem', margin: 0 }}>
-                    {state.error}
+                    {error}
                   </p>
                 )}
 
