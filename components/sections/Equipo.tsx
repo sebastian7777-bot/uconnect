@@ -36,7 +36,7 @@ export default function Equipo() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
           className="font-display"
           style={{ fontWeight: 700, color: '#FFF', fontSize: '1.8rem', lineHeight: 1.3, maxWidth: '520px', textAlign: 'center', margin: 0 }}
@@ -53,7 +53,7 @@ export default function Equipo() {
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, margin: '-12%' }}
+              viewport={{ once: false, margin: '-8%' }}
               transition={{ duration: 0.75, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 background:   '#0A0A0A',

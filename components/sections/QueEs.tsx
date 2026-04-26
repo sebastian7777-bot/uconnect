@@ -41,7 +41,7 @@ export default function QueEs() {
               variants={fadeUp}
               initial="hidden"
               whileInView="show"
-              viewport={{ once: true, margin: '-12%' }}
+              viewport={{ once: false, margin: '-8%' }}
               transition={{ duration: 0.75, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
               style={{
                 background:   'var(--bg-2)',
@@ -86,7 +86,7 @@ export default function QueEs() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             className="font-body"
             style={{ color: '#333', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 600 }}
           >
@@ -97,7 +97,7 @@ export default function QueEs() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="font-display"
             style={{ fontWeight: 900, color: '#FFF', lineHeight: 1.1, fontSize: 'clamp(2.2rem, 3.2vw, 3.8rem)', margin: 0 }}
@@ -113,7 +113,7 @@ export default function QueEs() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.75, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-body"
             style={{ color: '#666', fontSize: '1rem', lineHeight: 1.8, maxWidth: '400px', margin: 0 }}

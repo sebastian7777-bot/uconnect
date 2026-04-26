@@ -53,7 +53,7 @@ export default function Manifiesto() {
             key={gi}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-8%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ staggerChildren: 0.09, delayChildren: group.delay }}
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
           >
@@ -81,7 +81,7 @@ export default function Manifiesto() {
         <motion.div
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-8%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ staggerChildren: 0.09, delayChildren: 3.0 }}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', marginTop: '8px' }}
         >

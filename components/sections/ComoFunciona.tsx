@@ -66,7 +66,7 @@ export default function ComoFunciona() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="font-body"
             style={{ color: '#333', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 600 }}
@@ -78,7 +78,7 @@ export default function ComoFunciona() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.75, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="font-display"
             style={{ fontWeight: 900, color: '#FFF', lineHeight: 1.1, fontSize: 'clamp(2.2rem, 3.2vw, 3.6rem)', margin: 0 }}
@@ -91,7 +91,7 @@ export default function ComoFunciona() {
             <motion.div
               initial={{ scaleY: 0 }}
               whileInView={{ scaleY: 1 }}
-              viewport={{ once: true, margin: '-12%' }}
+              viewport={{ once: false, margin: '-8%' }}
               transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
               style={{
                 position:        'absolute',
@@ -110,7 +110,7 @@ export default function ComoFunciona() {
                 variants={fadeUp}
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: true, margin: '-12%' }}
+                viewport={{ once: false, margin: '-8%' }}
                 transition={{ duration: 0.75, delay: 0.3 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
                 style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', paddingBottom: i < 2 ? '28px' : '0' }}
               >
@@ -144,7 +144,7 @@ export default function ComoFunciona() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.6, delay: 0.7 }}
             className="font-body"
             style={{ color: '#333', fontSize: '0.8rem', fontStyle: 'italic', margin: 0 }}
@@ -161,7 +161,7 @@ export default function ComoFunciona() {
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
             style={{
               width:        '100%',

@@ -6,10 +6,10 @@ import { motion, useInView } from 'framer-motion'
 function ProgressCircles() {
   const [animated, setAnimated] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
-  const inView = useInView(ref, { once: true, margin: '-12%' })
+  const inView = useInView(ref, { once: false, margin: '-8%' })
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView) { setAnimated(false); return }
     const timer = setTimeout(() => setAnimated(true), 400)
     return () => clearTimeout(timer)
   }, [inView])
@@ -118,7 +118,7 @@ export default function LosTreinta() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <p className="font-display" style={{ fontWeight: 900, color: '#FFF', lineHeight: 1, fontSize: 'clamp(6rem, 12vw, 10rem)', margin: 0 }}>
@@ -133,7 +133,7 @@ export default function LosTreinta() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           className="font-body"
           style={{ color: '#777', fontSize: '1rem', lineHeight: 1.9, maxWidth: '480px', marginTop: '32px', marginBottom: 0 }}
@@ -151,7 +151,7 @@ export default function LosTreinta() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.6, delay: 0.25 }}
           className="font-body"
           style={{ color: '#333', fontSize: '0.8rem', fontStyle: 'italic', marginTop: '16px', marginBottom: 0 }}
@@ -165,7 +165,7 @@ export default function LosTreinta() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.5, delay: 0.3 }}
           style={{ width: '200px', height: '1px', background: '#1A1A1A', margin: '32px 0' }}
         />
@@ -174,7 +174,7 @@ export default function LosTreinta() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.75, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="font-display"
           style={{ fontWeight: 700, color: '#FFF', fontSize: '1.4rem', lineHeight: 1.4, margin: 0 }}
@@ -187,7 +187,7 @@ export default function LosTreinta() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <ProgressCircles />
@@ -197,7 +197,7 @@ export default function LosTreinta() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.6, delay: 0.5 }}
           style={{ marginTop: '32px' }}
         >

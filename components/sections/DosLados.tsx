@@ -149,7 +149,7 @@ export default function DosLados() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-10%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
@@ -189,7 +189,7 @@ export default function DosLados() {
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-10%' }}
+            viewport={{ once: false, margin: '-8%' }}
             style={{ flex: 1, minWidth: '280px', padding: '48px 40px 48px 0' }}
           >
             <motion.span
@@ -226,7 +226,7 @@ export default function DosLados() {
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, margin: '-10%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             style={{
               display:        'flex',
@@ -259,7 +259,7 @@ export default function DosLados() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '-10%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.6 }}
             style={{
               width:          '100%',
@@ -284,7 +284,7 @@ export default function DosLados() {
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-10%' }}
+            viewport={{ once: false, margin: '-8%' }}
             style={{ flex: 1, minWidth: '280px', padding: '48px 0 48px 40px' }}
           >
             <motion.span
@@ -324,7 +324,7 @@ export default function DosLados() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-10%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           style={{
             textAlign:    'center',

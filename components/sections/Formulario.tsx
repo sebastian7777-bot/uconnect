@@ -109,7 +109,7 @@ export default function Formulario() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
             className="font-body"
             style={{ color: '#444', fontStyle: 'italic', fontSize: '0.95rem', margin: 0 }}
@@ -122,7 +122,7 @@ export default function Formulario() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.75, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
             className="font-display"
             style={{ fontWeight: 700, color: '#FFF', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.25, margin: 0 }}
@@ -136,7 +136,7 @@ export default function Formulario() {
             variants={fadeUp}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
+            viewport={{ once: false, margin: '-8%' }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-body"
             style={{ color: '#555', fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '420px', margin: '0 auto' }}
@@ -151,7 +151,7 @@ export default function Formulario() {
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: '-12%' }}
+          viewport={{ once: false, margin: '-8%' }}
           transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           style={{
             background:   '#080808',
