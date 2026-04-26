@@ -26,7 +26,7 @@ export default function Citas() {
   const [current,   setCurrent]   = useState(0)
   const [direction, setDirection] = useState(1)
   const [paused,    setPaused]    = useState(false)
-  const timer = useRef<ReturnType<typeof setInterval>>()
+  const timer = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
 
   const go = (idx: number, dir: number) => {
     setDirection(dir)
