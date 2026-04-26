@@ -1,119 +1,95 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
-const GROUPS = [
+const PARRAFOS = [
   {
-    lines: [
-      { text: 'Hay una conversación que no ocurrió',   size: '1.3rem', weight: '400', color: '#333' },
-      { text: 'en el último evento al que fuiste.',    size: '1.3rem', weight: '400', color: '#333' },
-    ],
-    delay: 0,
+    texto: 'Hay una conversación que no ocurrió en el último evento al que fuiste.',
+    peso:  'ligero',
   },
   {
-    lines: [
-      { text: 'Una persona que hubiera cambiado algo.',           size: '1.1rem', weight: '400', color: '#555' },
-      { text: 'Un proyecto que no arrancó',                       size: '1.1rem', weight: '400', color: '#555' },
-      { text: 'porque dos personas nunca se encontraron.',        size: '1.1rem', weight: '400', color: '#555' },
-    ],
-    delay: 0.6,
+    texto: 'Una persona que hubiera cambiado algo. Un proyecto que no arrancó porque dos personas nunca se encontraron.',
+    peso:  'ligero',
   },
   {
-    lines: [
-      { text: 'Eso es lo que estamos resolviendo.',  size: '1.2rem', weight: '700', color: '#FFF' },
-    ],
-    delay: 1.4,
+    texto: 'Eso es lo que estamos resolviendo.',
+    peso:  'fuerte',
   },
   {
-    lines: [
-      { text: 'No con un feed.',       size: '1rem', weight: '400', color: '#444' },
-      { text: 'No con un algoritmo.',  size: '1rem', weight: '400', color: '#444' },
-      { text: 'Con intención.',        size: '1rem', weight: '700', color: '#FFF' },
-    ],
-    delay: 2.1,
+    texto: 'No con un feed. No con un algoritmo. Con intención.',
+    peso:  'ligero',
   },
 ]
 
-const ease = [0.16, 1, 0.3, 1] as [number, number, number, number]
-const lineVariant = {
-  hidden: { opacity: 0, y: 20 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+function WordReveal({ texto, peso }: { texto: string; peso: string }) {
+  const ref    = useRef(null)
+  const inView = useInView(ref, { once: false, margin: '-15%' })
+  const palabras = texto.split(' ')
+
+  return (
+    <p ref={ref} style={{
+      fontSize:       peso === 'fuerte' ? 'clamp(1.4rem, 2.5vw, 2rem)' : 'clamp(1rem, 1.8vw, 1.3rem)',
+      fontFamily:     'Plus Jakarta Sans',
+      fontWeight:     peso === 'fuerte' ? 700 : 400,
+      color:          peso === 'fuerte' ? '#E2E8F0' : '#475569',
+      lineHeight:     1.6,
+      textAlign:      'center',
+      margin:         '0 0 40px',
+      display:        'flex',
+      flexWrap:       'wrap',
+      justifyContent: 'center',
+      gap:            '0.3em',
+    }}>
+      {palabras.map((palabra, i) => (
+        <motion.span key={i}
+          initial={{ opacity: 0, y: 12 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+          transition={{ duration: 0.5, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {palabra}
+        </motion.span>
+      ))}
+    </p>
+  )
 }
 
 export default function Manifiesto() {
   return (
-    <section
-      style={{ position: 'relative', zIndex: 1, minHeight: '100vh', background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-      className="py-24 px-6"
-    >
-      <div style={{ maxWidth: '600px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', gap: '28px' }}>
+    <section style={{
+      padding:    '160px 5vw',
+      background: 'radial-gradient(ellipse at center, rgba(59,130,246,0.04) 0%, transparent 65%)',
+    }}>
+      <div style={{ maxWidth: '560px', margin: '0 auto' }}>
 
-        {GROUPS.map((group, gi) => (
-          <motion.div
-            key={gi}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: false, margin: '-8%' }}
-            transition={{ staggerChildren: 0.09, delayChildren: group.delay }}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}
-          >
-            {group.lines.map((line, li) => (
-              <motion.p
-                key={li}
-                variants={lineVariant}
-                className="font-display"
-                style={{
-                  fontWeight: line.weight,
-                  color:      line.color,
-                  fontSize:   line.size,
-                  lineHeight: 1.45,
-                  margin:     0,
-                  fontStyle:  gi === 0 ? 'italic' : 'normal',
-                }}
-              >
-                {line.text}
-              </motion.p>
-            ))}
-          </motion.div>
+        {PARRAFOS.map((p, i) => (
+          <WordReveal key={i} texto={p.texto} peso={p.peso} />
         ))}
 
-        {/* Final quote */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, margin: '-8%' }}
-          transition={{ staggerChildren: 0.09, delayChildren: 3.0 }}
-          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', marginTop: '8px' }}
-        >
-          <motion.p
-            variants={lineVariant}
-            className="font-display"
-            style={{ fontWeight: 900, color: '#FFF', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', lineHeight: 1.2, margin: 0 }}
-          >
-            Es como devolverse un poco
-          </motion.p>
-          <motion.p
-            variants={lineVariant}
-            className="font-display"
-            style={{ fontWeight: 900, color: '#FFF', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', lineHeight: 1.2, margin: 0 }}
-          >
-            en el tiempo para poder
-          </motion.p>
-          <motion.p
-            variants={lineVariant}
-            className="font-display"
-            style={{ fontWeight: 900, color: '#FFF', fontSize: 'clamp(1.6rem, 3vw, 2.2rem)', lineHeight: 1.2, margin: 0 }}
-          >
-            vivir más.
-          </motion.p>
-          <motion.p
-            variants={lineVariant}
-            className="font-body"
-            style={{ color: '#333', fontSize: '0.8rem', fontStyle: 'italic', marginTop: '12px', marginBottom: 0 }}
-          >
+        <div style={{ marginTop: '48px', textAlign: 'center' }}>
+          <p style={{
+            fontFamily:    'Plus Jakarta Sans',
+            fontWeight:    800,
+            fontSize:      'clamp(1.6rem, 3vw, 2.4rem)',
+            color:         '#E2E8F0',
+            lineHeight:    1.2,
+            letterSpacing: '-0.02em',
+            margin:        '0 0 16px',
+          }}>
+            "Es como devolverse un poco<br />
+            en el tiempo para poder<br />
+            vivir más."
+          </p>
+          <p style={{
+            fontSize:   '0.8rem',
+            color:      '#1E293B',
+            fontFamily: 'Inter',
+            fontStyle:  'italic',
+            margin:     0,
+          }}>
             — Conferencista, Tec de Monterrey
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
       </div>
     </section>

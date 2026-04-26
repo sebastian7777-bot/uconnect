@@ -72,30 +72,27 @@ function ProgressCircles() {
   )
 }
 
-function CountUp({ target }: { target: number }) {
-  const ref      = useRef<HTMLSpanElement>(null)
+function CountUp({ target, duration = 1500 }: { target: number; duration?: number }) {
   const [count, setCount] = useState(0)
-  const animated = useRef(false)
+  const ref     = useRef(null)
+  const inView  = useInView(ref, { once: false, margin: '-10%' })
+  const started = useRef(false)
 
   useEffect(() => {
-    const obs = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !animated.current) {
-        animated.current = true
-        const start = Date.now()
-        const dur   = 1500
-        const tick  = () => {
-          const p  = Math.min((Date.now() - start) / dur, 1)
-          const v  = 1 - Math.pow(1 - p, 3)
-          setCount(Math.floor(v * target))
-          if (p < 1) requestAnimationFrame(tick)
-          else setCount(target)
-        }
-        requestAnimationFrame(tick)
-      }
-    }, { threshold: 0.3 })
-    if (ref.current) obs.observe(ref.current)
-    return () => obs.disconnect()
-  }, [target])
+    if (!inView) { setCount(0); started.current = false; return }
+    if (started.current) return
+    started.current = true
+
+    const start = performance.now()
+    const tick  = (now: number) => {
+      const elapsed  = now - start
+      const progress = Math.min(elapsed / duration, 1)
+      const ease     = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.round(ease * target))
+      if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+  }, [inView, target, duration])
 
   return <span ref={ref}>{count}</span>
 }
