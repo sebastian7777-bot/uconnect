@@ -9,15 +9,15 @@ const CITAS = [
   },
   {
     text:   'Sobrepensar todo: qué decir, cómo hacerlo sin verme raro. Al final decidí esperar un mejor momento. Ese momento nunca llegó.',
-    author: '— Jerónimo, 17 · Ing. de Sistemas, EIA',
+    author: '— Jerónimo, 18 · Ing. de Sistemas, EAFIT',
   },
   {
     text:   'Conecté bien con la persona pero no logramos mantenernos en contacto después del evento. Cada quien siguió por su camino.',
-    author: '— Samuel, 18 · Ing. de Sistemas, EIA',
+    author: '— Samuel, 19 · Administración, Uniandes',
   },
   {
     text:   'Pensaba que más tarde podríamos hablar, pero se fue antes. Me quedé sin saber ni siquiera su nombre.',
-    author: '— David, 18 · Ing. de Sistemas, EIA',
+    author: '— David, 18 · Ing. Industrial, Universidad Nacional',
   },
 ]
 
