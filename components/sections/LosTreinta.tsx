@@ -3,6 +3,75 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 
+function ProgressCircles() {
+  const [animated, setAnimated] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-12%' })
+
+  useEffect(() => {
+    if (!inView) return
+    const timer = setTimeout(() => setAnimated(true), 400)
+    return () => clearTimeout(timer)
+  }, [inView])
+
+  return (
+    <div ref={ref} style={{ textAlign: 'center' }}>
+      <div style={{
+        display:         'flex',
+        alignItems:      'center',
+        justifyContent:  'center',
+        gap:             '0px',
+        margin:          '24px auto',
+      }}>
+        <svg width="160" height="80" viewBox="0 0 160 80" fill="none">
+          <defs>
+            <clipPath id="leftClip">
+              <rect x="0" y="0" width={animated ? 65 : 0} height="80">
+                <animate
+                  attributeName="width"
+                  from="0" to="65"
+                  dur="1.5s"
+                  calcMode="spline"
+                  keySplines="0.16 1 0.3 1"
+                  begin={animated ? '0s' : 'indefinite'}
+                  fill="freeze"
+                />
+              </rect>
+            </clipPath>
+            <clipPath id="rightClip">
+              <rect x="65" y="0" width={animated ? 95 : 0} height="80">
+                <animate
+                  attributeName="width"
+                  from="0" to="95"
+                  dur="1.5s"
+                  calcMode="spline"
+                  keySplines="0.16 1 0.3 1"
+                  begin={animated ? '0.2s' : 'indefinite'}
+                  fill="freeze"
+                />
+              </rect>
+            </clipPath>
+          </defs>
+
+          <circle cx="55"  cy="40" r="34" stroke="#1A1A35" strokeWidth="2" fill="none"/>
+          <circle cx="105" cy="40" r="34" stroke="#1A1A35" strokeWidth="2" fill="none"/>
+
+          <circle cx="55"  cy="40" r="34" stroke="#3B82F6" strokeWidth="2" fill="rgba(59,130,246,0.08)" clipPath="url(#leftClip)"/>
+          <circle cx="105" cy="40" r="34" stroke="#1A1A35" strokeWidth="2" fill="rgba(59,130,246,0.03)" clipPath="url(#rightClip)"/>
+
+          <text x="48"  y="36" textAnchor="middle" fontSize="11" fill="#3B82F6" fontFamily="Plus Jakarta Sans" fontWeight="700">5</text>
+          <text x="48"  y="50" textAnchor="middle" fontSize="9"  fill="#475569" fontFamily="Inter">tomados</text>
+          <text x="105" y="36" textAnchor="middle" fontSize="11" fill="#1E293B" fontFamily="Plus Jakarta Sans" fontWeight="700">25</text>
+          <text x="105" y="50" textAnchor="middle" fontSize="9"  fill="#1E293B" fontFamily="Inter">libres</text>
+        </svg>
+      </div>
+      <p style={{ fontSize: '0.75rem', color: '#1E293B', fontFamily: 'Inter', fontStyle: 'italic', textAlign: 'center' }}>
+        Primera fase · 30 cupos en total
+      </p>
+    </div>
+  )
+}
+
 function CountUp({ target }: { target: number }) {
   const ref      = useRef<HTMLSpanElement>(null)
   const [count, setCount] = useState(0)
@@ -37,8 +106,6 @@ const fadeUp = {
 }
 
 export default function LosTreinta() {
-  const progressRef = useRef<HTMLDivElement>(null)
-  const inView      = useInView(progressRef, { once: true, margin: '-12%' })
 
   return (
     <section
@@ -116,28 +183,14 @@ export default function LosTreinta() {
           Eres parte de lo que UConnect es.
         </motion.p>
 
-        {/* Progress bar */}
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: '-12%' }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          style={{ width: '100%', maxWidth: '360px', marginTop: '32px' }}
-          ref={progressRef}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-            <span className="font-body" style={{ color: '#333', fontSize: '0.75rem' }}>Primera fase</span>
-            <span className="font-body" style={{ color: '#333', fontSize: '0.75rem' }}>30 cupos</span>
-          </div>
-          <div style={{ background: '#141414', borderRadius: '100px', height: '3px', overflow: 'hidden' }}>
-            <motion.div
-              style={{ height: '100%', background: '#3B82F6', borderRadius: '100px' }}
-              initial={{ width: '0%' }}
-              animate={inView ? { width: '18%' } : { width: '0%' }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-            />
-          </div>
+          <ProgressCircles />
         </motion.div>
 
         <motion.div

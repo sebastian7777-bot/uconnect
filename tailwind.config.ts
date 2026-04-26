@@ -8,25 +8,27 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      colors: {
-        uc: {
-          black:   '#000000',
-          surface: '#0F0F0F',
-          card:    '#141414',
-          border:  '#1E1E1E',
-          white:   '#FFFFFF',
-          sec:     '#999999',
-          muted:   '#555555',
-          blue:    '#3B82F6',
-          'blue-glow': 'rgba(59,130,246,0.12)',
-        },
-      },
       fontFamily: {
         display: ['var(--font-display)', 'Plus Jakarta Sans', 'sans-serif'],
-        body:    ['var(--font-body)',    'Space Grotesk',    'sans-serif'],
+        body:    ['var(--font-body)',    'Inter',             'sans-serif'],
+      },
+      colors: {
+        bg:        'var(--bg)',
+        'bg-2':    'var(--bg-2)',
+        'bg-3':    'var(--bg-3)',
+        border:    'var(--border)',
+        'border-2':'var(--border-2)',
+        blue:      'var(--blue)',
+        'blue-b':  'var(--blue-bright)',
+        'blue-d':  'var(--blue-dim)',
+        'gray-1':  'var(--gray-1)',
+        'gray-2':  'var(--gray-2)',
+        'gray-3':  'var(--gray-3)',
+        'gray-4':  'var(--gray-4)',
       },
     },
   },
   plugins: [],
 }
+
 export default config

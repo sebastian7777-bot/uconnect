@@ -308,7 +308,17 @@ export default function Formulario() {
                     el.style.transform  = 'translateY(0)'
                   }}
                 >
-                  {loading ? <><Spinner /> Enviando...</> : 'Solicitar mi cupo'}
+                  {loading ? (
+                    <><Spinner /> Enviando...</>
+                  ) : (
+                    <>
+                      <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
+                        <circle cx="33" cy="50" r="28" stroke="black" strokeWidth="8" fill="none"/>
+                        <circle cx="67" cy="50" r="28" stroke="black" strokeWidth="8" fill="none"/>
+                      </svg>
+                      Solicitar mi cupo
+                    </>
+                  )}
                 </button>
 
                 <p className="font-body" style={{ color: '#222', fontSize: '0.72rem', textAlign: 'center', margin: 0 }}>

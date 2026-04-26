@@ -4,7 +4,23 @@ import { useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { motion } from 'framer-motion'
 
-const HeroSphere = dynamic(() => import('../three/HeroSphere'), { ssr: false })
+const GlobeComponent = dynamic(
+  () => import('@/components/globe/GlobeComponent'),
+  {
+    ssr: false,
+    loading: () => (
+      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{
+          width: 40, height: 40,
+          border: '2px solid #1a1a1a',
+          borderTop: '2px solid #3B82F6',
+          borderRadius: '50%',
+          animation: 'spin 0.8s linear infinite',
+        }} />
+      </div>
+    ),
+  }
+)
 
 const h1Lines = [
   'Conectamos personas reales',
@@ -36,25 +52,20 @@ export default function Hero() {
         zIndex:     1,
       }}
     >
-      {/* Desktop: two columns */}
       {!isMobile ? (
         <div style={{ display: 'flex', width: '100%', minHeight: '100vh', alignItems: 'center' }}>
-          {/* Left: text (55%) */}
           <div style={{ width: '55%', paddingLeft: '6vw', paddingRight: '2vw', paddingTop: '80px', paddingBottom: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
             <TextContent />
           </div>
-
-          {/* Right: sphere (45%) */}
           <div style={{ width: '45%', height: '100vh', position: 'relative', flexShrink: 0 }}>
             {ready && (
               <Suspense fallback={null}>
-                <HeroSphere count={300} />
+                <GlobeComponent />
               </Suspense>
             )}
           </div>
         </div>
       ) : (
-        /* Mobile: stacked */
         <div style={{ width: '100%', paddingTop: '80px', paddingBottom: '40px', display: 'flex', flexDirection: 'column', gap: '0' }}>
           <div style={{ padding: '0 24px 32px', display: 'flex', flexDirection: 'column', gap: '18px' }}>
             <TextContent />
@@ -62,7 +73,7 @@ export default function Hero() {
           <div style={{ width: '100%', height: '280px', position: 'relative' }}>
             {ready && (
               <Suspense fallback={null}>
-                <HeroSphere count={150} />
+                <GlobeComponent />
               </Suspense>
             )}
           </div>
@@ -75,7 +86,6 @@ export default function Hero() {
 function TextContent() {
   return (
     <>
-      {/* Badge */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -95,7 +105,6 @@ function TextContent() {
         </span>
       </motion.div>
 
-      {/* Pre-título */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -108,7 +117,6 @@ function TextContent() {
         Nunca las vas a conocer.
       </motion.p>
 
-      {/* H1 */}
       <motion.h1
         className="font-display"
         style={{ fontWeight: 900, color: '#FFF', lineHeight: 1.05, fontSize: 'clamp(2.8rem, 4.5vw, 5.5rem)', margin: 0 }}
@@ -126,7 +134,6 @@ function TextContent() {
         ))}
       </motion.h1>
 
-      {/* Subtítulo */}
       <motion.p
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -139,7 +146,6 @@ function TextContent() {
         ahí, en ese evento, en ese momento.
       </motion.p>
 
-      {/* CTAs */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
@@ -166,14 +172,14 @@ function TextContent() {
             onMouseEnter={e => {
               const el = e.currentTarget
               el.style.background = '#E8E8E8'
-              el.style.transform = 'translateY(-2px)'
-              el.style.boxShadow = '0 8px 24px rgba(255,255,255,0.12)'
+              el.style.transform  = 'translateY(-2px)'
+              el.style.boxShadow  = '0 8px 24px rgba(255,255,255,0.12)'
             }}
             onMouseLeave={e => {
               const el = e.currentTarget
               el.style.background = '#FFF'
-              el.style.transform = 'translateY(0)'
-              el.style.boxShadow = 'none'
+              el.style.transform  = 'translateY(0)'
+              el.style.boxShadow  = 'none'
             }}
           >
             Quiero ser de los primeros 30
@@ -183,13 +189,13 @@ function TextContent() {
             href="#como-funciona"
             className="font-body"
             style={{
-              display:        'inline-flex',
-              alignItems:     'center',
-              color:          '#555',
-              fontSize:       '0.95rem',
-              textDecoration: 'underline',
+              display:             'inline-flex',
+              alignItems:          'center',
+              color:               '#555',
+              fontSize:            '0.95rem',
+              textDecoration:      'underline',
               textUnderlineOffset: '4px',
-              transition:     'color 0.2s ease',
+              transition:          'color 0.2s ease',
             }}
             onMouseEnter={e => { e.currentTarget.style.color = '#FFF' }}
             onMouseLeave={e => { e.currentTarget.style.color = '#555' }}

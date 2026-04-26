@@ -2,24 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg:          #05050F;
+  --bg-2:        #080812;
+  --bg-3:        #0B0B18;
+  --border:      rgba(255,255,255,0.06);
+  --border-2:    rgba(255,255,255,0.1);
+  --blue:        #3B82F6;
+  --blue-bright: #60A5FA;
+  --blue-dim:    #1D4ED8;
+  --gray-1:      #CCCCCC;
+  --gray-2:      #888888;
+  --gray-3:      #555555;
+  --gray-4:      #333333;
+}
+
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
 
 body {
   color: #ffffff;
-  background: #000000;
+  background: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .font-display { font-family: var(--font-display, 'Plus Jakarta Sans', sans-serif) !important; }
-.font-body    { font-family: var(--font-body,    'Space Grotesk',    sans-serif) !important; }
+.font-body    { font-family: var(--font-body,    'Inter',             sans-serif) !important; }
 
-@keyframes ucPulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.2; }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 @layer utilities {
   .glass-card {

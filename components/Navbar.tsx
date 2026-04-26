@@ -2,6 +2,17 @@
 
 import { useEffect, useState } from 'react'
 
+const UConnectLogo = ({ size = 28 }: { size?: number }) => (
+  <svg width={size} height={size}
+       viewBox="0 0 100 100" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <circle cx="33" cy="50" r="28"
+            stroke="white" strokeWidth="7" fill="none"/>
+    <circle cx="67" cy="50" r="28"
+            stroke="white" strokeWidth="7" fill="none"/>
+  </svg>
+)
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
@@ -14,29 +25,29 @@ export default function Navbar() {
   return (
     <nav
       style={{
-        position:       'fixed',
-        top:            0,
-        left:           0,
-        right:          0,
-        zIndex:         1000,
-        height:         '60px',
-        padding:        '0 5vw',
-        display:        'flex',
-        alignItems:     'center',
-        justifyContent: 'space-between',
-        transition:     'all 0.4s ease',
-        background:     scrolled ? 'rgba(0,0,0,0.88)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
+        position:            'fixed',
+        top:                 0,
+        left:                0,
+        right:               0,
+        zIndex:              1000,
+        height:              '60px',
+        padding:             '0 5vw',
+        display:             'flex',
+        alignItems:          'center',
+        justifyContent:      'space-between',
+        transition:          'all 0.4s ease',
+        background:          scrolled ? 'rgba(5,5,15,0.88)' : 'transparent',
+        backdropFilter:      scrolled ? 'blur(20px) saturate(180%)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(20px) saturate(180%)' : 'none',
-        borderBottom:   scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
+        borderBottom:        scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
       }}
     >
-      <span
-        className="font-display font-bold text-white"
-        style={{ fontSize: '1rem', letterSpacing: '-0.02em' }}
-      >
-        UConnect
-      </span>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <UConnectLogo size={28} />
+        <span style={{ fontFamily: 'Plus Jakarta Sans', fontWeight: 700, fontSize: '1rem', color: '#E2E8F0', letterSpacing: '-0.02em' }}>
+          UConnect
+        </span>
+      </div>
 
       <a
         href="#formulario"
@@ -54,15 +65,15 @@ export default function Navbar() {
         }}
         onMouseEnter={e => {
           const el = e.currentTarget
-          el.style.background = '#FFF'
-          el.style.color = '#000'
-          el.style.borderColor = '#FFF'
+          el.style.background   = '#FFF'
+          el.style.color        = '#000'
+          el.style.borderColor  = '#FFF'
         }}
         onMouseLeave={e => {
           const el = e.currentTarget
-          el.style.background = 'transparent'
-          el.style.color = '#FFF'
-          el.style.borderColor = 'rgba(255,255,255,0.2)'
+          el.style.background   = 'transparent'
+          el.style.color        = '#FFF'
+          el.style.borderColor  = 'rgba(255,255,255,0.2)'
         }}
       >
         Quiero ser de los primeros

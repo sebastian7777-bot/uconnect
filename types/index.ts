@@ -1,9 +1,24 @@
+export interface City {
+  name: string
+  lat:  number
+  lng:  number
+  major: boolean
+}
+
+export interface Arc {
+  startLat: number
+  startLng: number
+  endLat:   number
+  endLng:   number
+  color:    string
+}
+
 export interface FormData {
-  nombre: string
-  email: string
+  nombre:       string
+  email:        string
   organizacion: string
-  razon: string
-  perfil: string
+  razon:        string
+  perfil:       string
 }
 
 export interface FormState {

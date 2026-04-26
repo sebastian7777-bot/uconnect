@@ -21,9 +21,10 @@ const CITAS = [
   },
 ]
 
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number]
 const fadeUp = {
-  hidden:  { opacity: 0, y: 28 },
-  show:    { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] as number[] } },
+  hidden: { opacity: 0, y: 28 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.75, ease } },
 }
 
 export default function ElDolor() {
@@ -50,12 +51,25 @@ export default function ElDolor() {
               style={{
                 background:   'rgba(255,255,255,0.03)',
                 border:       '1px solid rgba(255,255,255,0.07)',
-                borderLeft:   '2px solid #FFFFFF',
                 borderRadius: '10px',
                 padding:      '20px 22px',
                 marginBottom: '12px',
+                display:      'flex',
+                flexDirection:'column',
               }}
             >
+              <div style={{
+                display:       'flex',
+                flexDirection: 'column',
+                alignItems:    'center',
+                gap:           '0px',
+                marginBottom:  '14px',
+              }}>
+                <svg width="10" height="26" viewBox="0 0 10 26" fill="none">
+                  <circle cx="5" cy="5"  r="4" stroke="rgba(59,130,246,0.5)" strokeWidth="1.5" fill="none"/>
+                  <circle cx="5" cy="21" r="4" stroke="rgba(59,130,246,0.3)" strokeWidth="1.5" fill="none"/>
+                </svg>
+              </div>
               <p
                 className="font-body"
                 style={{ fontStyle: 'italic', color: '#D0D0D0', fontSize: '0.9rem', lineHeight: 1.65, margin: 0 }}
@@ -102,21 +116,6 @@ export default function ElDolor() {
             Es no saber<br />
             de qué hablarle.
           </motion.h2>
-
-          <motion.p
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-12%' }}
-            transition={{ duration: 0.75, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="font-body"
-            style={{ color: '#666', fontSize: '1rem', lineHeight: 1.8, maxWidth: '400px', margin: 0 }}
-          >
-            128 personas encuestadas en EIA, EAFIT,
-            Uniandes, Sabana, Javeriana, Valle y Nacional
-            describieron el mismo patrón:
-            falta de contexto, no de interés.
-          </motion.p>
 
           <motion.div
             variants={fadeUp}
