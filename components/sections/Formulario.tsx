@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { Mode } from '@/app/page'
 
 const MAX = 200
 
@@ -51,7 +52,7 @@ function Spinner() {
   return <div style={{ width: '20px', height: '20px', border: '2px solid rgba(0,0,0,0.25)', borderTopColor: '#000', borderRadius: '50%', animation: 'spin 0.7s linear infinite' }} />
 }
 
-export default function Formulario() {
+export default function Formulario({ mode = 'asistente' }: { mode?: Mode }) {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error,   setError]   = useState('')
@@ -127,9 +128,9 @@ export default function Formulario() {
             className="font-display"
             style={{ fontWeight: 700, color: '#FFF', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', lineHeight: 1.25, margin: 0 }}
           >
-            30 cupos. Estamos construyendo<br />
-            algo desde cero con las<br />
-            personas correctas.
+            {mode === 'organizador'
+              ? 'Activa UConnect en tu evento'
+              : <>30 cupos. Estamos construyendo<br />algo desde cero con las<br />personas correctas.</>}
           </motion.h2>
 
           <motion.p
@@ -141,8 +142,9 @@ export default function Formulario() {
             className="font-body"
             style={{ color: '#555', fontSize: '0.9rem', lineHeight: 1.7, maxWidth: '420px', margin: '0 auto' }}
           >
-            Cuéntanos quién eres. Revisamos cada perfil
-            manualmente y te contactamos si quedas seleccionado.
+            {mode === 'organizador'
+              ? 'Cuéntanos sobre tus eventos. Te contactamos en menos de 48 horas.'
+              : 'Cuéntanos quién eres. Revisamos cada perfil manualmente y te contactamos si quedas seleccionado.'}
           </motion.p>
         </div>
 
@@ -222,7 +224,7 @@ export default function Formulario() {
                   <label style={labelStyle}>Universidad, empresa u organización</label>
                   <input
                     type="text" name="organizacion" required
-                    placeholder="EIA, EAFIT, tu empresa..."
+                    placeholder={mode === 'organizador' ? '¿Qué tipo de eventos organizas?' : 'EIA, EAFIT, tu empresa...'}
                     style={inputStyle}
                     onFocus={e => focusStyle(e.currentTarget)}
                     onBlur={e  => blurStyle(e.currentTarget)}
@@ -324,7 +326,7 @@ export default function Formulario() {
                         <circle cx="33" cy="50" r="28" stroke="black" strokeWidth="8" fill="none"/>
                         <circle cx="67" cy="50" r="28" stroke="black" strokeWidth="8" fill="none"/>
                       </svg>
-                      Solicitar mi cupo
+                      {mode === 'organizador' ? 'Explorar la alianza' : 'Solicitar mi cupo'}
                     </>
                   )}
                 </button>
