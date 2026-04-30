@@ -2,18 +2,18 @@
 
 import { motion } from 'framer-motion'
 
-const CARDS = [
+const AFIRMACIONES = [
   {
-    ellos:    'Conectan fotos',
-    uconnect: 'Conecta personas con intereses reales',
+    titulo: 'Conecta personas con intereses reales',
+    desc: 'No ves perfiles al azar. Ves a las personas que comparten lo que te importa — en ese evento, en ese momento.',
   },
   {
-    ellos:    'Conectan CVs',
-    uconnect: 'Conecta presencia física + contexto',
+    titulo: 'Presencia física + contexto',
+    desc: 'La conversación ya tiene un punto de partida antes de que digas la primera palabra.',
   },
   {
-    ellos:    'Grupos de WhatsApp',
-    uconnect: 'Continuidad con propósito — Nudge',
+    titulo: 'Continuidad con propósito — Nudge',
+    desc: 'La conexión que nació en el evento no muere en la primera semana. Nudge la mantiene viva.',
   },
 ]
 
@@ -30,12 +30,12 @@ export default function LaDiferencia() {
     >
       <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
 
-        {/* Left: comparison cards (45%) */}
+        {/* Left: afirmaciones (45%) */}
         <div
           className="w-full md:w-[45%]"
           style={{ padding: '40px 3vw 40px 6vw', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '12px' }}
         >
-          {CARDS.map((card, i) => (
+          {AFIRMACIONES.map((item, i) => (
             <motion.div
               key={i}
               variants={fadeUp}
@@ -50,32 +50,12 @@ export default function LaDiferencia() {
                 padding:      '24px',
               }}
             >
-              {/* Header row */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '14px' }}>
-                <span
-                  className="font-body"
-                  style={{ color: '#333', fontSize: '0.7rem', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600 }}
-                >
-                  Ellos
-                </span>
-                <span
-                  className="font-body"
-                  style={{ color: '#3B82F6', fontSize: '0.7rem', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600 }}
-                >
-                  UConnect
-                </span>
-              </div>
-              {/* Divider */}
-              <div style={{ height: '1px', background: '#1A1A1A', marginBottom: '14px' }} />
-              {/* Content row */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
-                <p className="font-body" style={{ color: '#444', fontSize: '0.9rem', lineHeight: 1.5, margin: 0, flex: 1 }}>
-                  {card.ellos}
-                </p>
-                <p className="font-body" style={{ color: '#CCC', fontSize: '0.9rem', lineHeight: 1.5, margin: 0, flex: 1, textAlign: 'right' }}>
-                  {card.uconnect}
-                </p>
-              </div>
+              <p className="font-display" style={{ color: '#FFF', fontSize: '1rem', fontWeight: 700, lineHeight: 1.35, margin: '0 0 10px' }}>
+                {item.titulo}
+              </p>
+              <p className="font-body" style={{ color: '#555', fontSize: '0.88rem', lineHeight: 1.65, margin: 0 }}>
+                {item.desc}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -93,7 +73,7 @@ export default function LaDiferencia() {
             className="font-body"
             style={{ color: '#333', fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 600 }}
           >
-            No es lo que crees
+            Por qué existe
           </motion.span>
 
           <motion.h2
@@ -105,9 +85,6 @@ export default function LaDiferencia() {
             className="font-display"
             style={{ fontWeight: 900, color: '#FFF', lineHeight: 1.1, fontSize: 'clamp(2.2rem, 3.2vw, 3.8rem)', margin: 0 }}
           >
-            No es una app<br />
-            de citas.<br />
-            No es LinkedIn.<br />
             Es algo que<br />
             no existía.
           </motion.h2>
@@ -121,11 +98,10 @@ export default function LaDiferencia() {
             className="font-body"
             style={{ color: '#666', fontSize: '1rem', lineHeight: 1.8, maxWidth: '400px', margin: 0 }}
           >
-            Las apps para citas conectan fotos.
-            LinkedIn conecta CVs.
             UConnect conecta personas que ya están
             en el mismo lugar, con los mismos intereses,
             en ese momento específico.
+            Eso no existía antes.
           </motion.p>
         </div>
 

@@ -3,16 +3,11 @@
 import { useEffect, useState } from 'react'
 import { Mode } from '@/app/page'
 
-function Logo({ size = 32, fill = '#05050F' }: { size?: number; fill?: string }) {
+function Logo({ size = 32 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="50" cy="50" r="26" stroke="white" strokeWidth="5" fill="none" />
-      <rect x="27" y="27" width="46" height="46" rx="13" stroke="white" strokeWidth="5" fill="none" />
-      <rect x="27" y="50" width="46" height="24" rx="0" fill={fill} />
-      <path d="M 27 62 L 27 63 Q 27 73 40 73 L 60 73 Q 73 73 73 62 L 73 50" stroke="white" strokeWidth="5" fill="none" strokeLinecap="round" />
-      <rect x="27" y="27" width="46" height="24" rx="0" fill={fill} />
-      <path d="M 24 50 A 26 26 0 0 1 76 50" stroke="white" strokeWidth="5" strokeLinecap="round" fill="none" />
-      <path d="M 27 50 L 27 40 Q 27 27 40 27 L 60 27 Q 73 27 73 40 L 73 50" stroke="white" strokeWidth="5" fill="none" strokeLinecap="round" />
+      <circle cx="38" cy="50" r="28" stroke="white" strokeWidth="6" fill="none"/>
+      <circle cx="62" cy="50" r="28" stroke="white" strokeWidth="6" fill="none"/>
     </svg>
   )
 }
@@ -24,7 +19,6 @@ export default function Navbar({ mode, setMode }: { mode: Mode; setMode: (m: Mod
     window.addEventListener('scroll', handler, { passive: true })
     return () => window.removeEventListener('scroll', handler)
   }, [])
-  const logoFill = scrolled ? 'rgba(5,5,15,0.85)' : '#05050F'
   return (
     <nav style={{
       position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
@@ -37,7 +31,7 @@ export default function Navbar({ mode, setMode }: { mode: Mode; setMode: (m: Mod
       borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <Logo size={34} fill={logoFill} />
+        <Logo size={34} />
         <span className="font-display font-bold text-white" style={{ fontSize: '1rem', letterSpacing: '-0.02em' }}>UConnect</span>
       </div>
       <div style={{

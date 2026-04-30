@@ -221,10 +221,10 @@ export default function Formulario({ mode = 'asistente' }: { mode?: Mode }) {
 
                 {/* Organización */}
                 <div>
-                  <label style={labelStyle}>Universidad, empresa u organización</label>
+                  <label style={labelStyle}>{mode === 'organizador' ? '¿Qué tipo de eventos organizas?' : 'Universidad, empresa u organización'}</label>
                   <input
                     type="text" name="organizacion" required
-                    placeholder={mode === 'organizador' ? '¿Qué tipo de eventos organizas?' : 'EIA, EAFIT, tu empresa...'}
+                    placeholder={mode === 'organizador' ? 'Hackathones, inmersiones, conferencias...' : 'EIA, EAFIT, tu empresa...'}
                     style={inputStyle}
                     onFocus={e => focusStyle(e.currentTarget)}
                     onBlur={e  => blurStyle(e.currentTarget)}

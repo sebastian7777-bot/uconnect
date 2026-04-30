@@ -14,7 +14,7 @@ const GlobeComponent = dynamic(
   )}
 )
 
-const rotatingWords = ['primiparos', 'founders', 'inversores', 'creativos', 'personas que quieren crear algo']
+const rotatingWords = ['estudiantes', 'emprendedores', 'inversores', 'creativos', 'personas con ideas']
 const question = '¿Cuántas veces fuiste a un evento y te fuiste sin conocer a quien debías?'
 
 export default function Hero({ mode }: { mode: Mode }) {
@@ -78,7 +78,7 @@ export default function Hero({ mode }: { mode: Mode }) {
       <motion.h1 className="font-display" style={{ fontWeight: 900, color: '#FFF', lineHeight: 1.05, fontSize: 'clamp(2.8rem, 4.5vw, 5.5rem)', margin: 0 }}>
         <motion.span className="block" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}>
           Conectamos{' '}
-          <span style={{ position: 'relative', display: 'inline-block' }}
+          <span style={{ position: 'relative', display: 'inline-block', minHeight: '1.1em', minWidth: '220px' }}
             onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
             <AnimatePresence mode="wait">
               <motion.span key={wordIdx}

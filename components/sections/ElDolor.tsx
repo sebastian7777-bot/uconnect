@@ -30,15 +30,14 @@ const fadeUp = {
 export default function ElDolor() {
   return (
     <section
-      style={{ position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex', alignItems: 'center' }}
+      style={{ position: 'relative', zIndex: 1, paddingTop: '60px', display: 'flex', alignItems: 'center' }}
       className="py-24 md:py-0"
     >
-      <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap', gap: '0' }}>
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
 
-        {/* Left: citas (45%) */}
+        {/* Citas */}
         <div
-          className="w-full md:w-[45%]"
-          style={{ padding: '40px 5vw 40px 6vw', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '0' }}
+          style={{ padding: '40px 6vw 20px', display: 'flex', flexDirection: 'column', gap: '0' }}
         >
           {CITAS.map((c, i) => (
             <motion.div
@@ -58,18 +57,6 @@ export default function ElDolor() {
                 flexDirection:'column',
               }}
             >
-              <div style={{
-                display:       'flex',
-                flexDirection: 'column',
-                alignItems:    'center',
-                gap:           '0px',
-                marginBottom:  '14px',
-              }}>
-                <svg width="10" height="26" viewBox="0 0 10 26" fill="none">
-                  <circle cx="5" cy="5"  r="4" stroke="rgba(59,130,246,0.5)" strokeWidth="1.5" fill="none"/>
-                  <circle cx="5" cy="21" r="4" stroke="rgba(59,130,246,0.3)" strokeWidth="1.5" fill="none"/>
-                </svg>
-              </div>
               <p
                 className="font-body"
                 style={{ fontStyle: 'italic', color: '#D0D0D0', fontSize: '0.9rem', lineHeight: 1.65, margin: 0 }}
@@ -86,10 +73,9 @@ export default function ElDolor() {
           ))}
         </div>
 
-        {/* Right: editorial text (55%) */}
+        {/* El Problema */}
         <div
-          className="w-full md:w-[55%]"
-          style={{ padding: '40px 6vw 40px 4vw', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '20px' }}
+          style={{ padding: '20px 6vw 60px', borderTop: '1px solid rgba(255,255,255,0.06)', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '20px' }}
         >
           <motion.span
             variants={fadeUp}
