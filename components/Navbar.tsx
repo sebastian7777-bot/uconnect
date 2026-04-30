@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Mode } from '@/app/page'
+import type { Mode } from '@/app/page'
 
 function Logo({ size = 32 }: { size?: number }) {
   return (
@@ -36,16 +36,19 @@ export default function Navbar({ mode, setMode }: { mode: Mode; setMode: (m: Mod
       </div>
       <div style={{
         display: 'flex', alignItems: 'center',
-        background: 'rgba(255,255,255,0.06)', borderRadius: '10px',
-        padding: '3px', gap: '2px', border: '1px solid rgba(255,255,255,0.1)',
+        background: 'rgba(255,255,255,0.08)', borderRadius: '12px',
+        padding: '4px', gap: '2px',
+        border: '1px solid rgba(255,255,255,0.16)',
+        boxShadow: '0 0 0 1px rgba(59,130,246,0.15)',
       }}>
         {(['asistente', 'organizador'] as Mode[]).map(m => (
-          <button key={m} onClick={() => setMode(m)} className="font-body" style={{
-            background: mode === m ? '#fff' : 'transparent',
-            color: mode === m ? '#000' : 'rgba(255,255,255,0.5)',
-            border: 'none', borderRadius: '7px', padding: '6px 16px',
-            fontSize: '0.82rem', fontWeight: mode === m ? 700 : 400,
-            cursor: 'pointer', transition: 'all 0.22s ease', letterSpacing: '0.01em',
+          <button key={m} onClick={() => setMode(m)} style={{
+            background: mode === m ? '#3B82F6' : 'transparent',
+            color: mode === m ? '#fff' : 'rgba(255,255,255,0.45)',
+            border: 'none', borderRadius: '9px', padding: '9px 22px',
+            fontSize: '0.88rem', fontWeight: mode === m ? 700 : 400,
+            cursor: 'pointer', transition: 'all 0.2s ease',
+            letterSpacing: '0.01em', whiteSpace: 'nowrap',
           }}>
             {m === 'asistente' ? 'Soy asistente' : 'Soy organizador'}
           </button>

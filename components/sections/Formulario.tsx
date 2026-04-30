@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Mode } from '@/app/page'
+import type { Mode } from '@/app/page'
 
 const MAX = 200
 
@@ -233,7 +233,7 @@ export default function Formulario({ mode = 'asistente' }: { mode?: Mode }) {
 
                 {/* Razón */}
                 <div>
-                  <label style={labelStyle}>¿Por qué quieres ser parte del prelanzamiento?</label>
+                  <label style={labelStyle}>{mode === 'organizador' ? '¿Por qué quieres activar UConnect en tu evento?' : '¿Por qué quieres ser parte del prelanzamiento?'}</label>
                   <div style={{ position: 'relative' }}>
                     <textarea
                       name="razon" required maxLength={MAX} rows={4}

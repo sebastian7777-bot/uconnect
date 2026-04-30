@@ -4,16 +4,16 @@ import { motion } from 'framer-motion'
 
 const AFIRMACIONES = [
   {
-    titulo: 'Conecta personas con intereses reales',
-    desc: 'No ves perfiles al azar. Ves a las personas que comparten lo que te importa — en ese evento, en ese momento.',
+    label: 'Intereses reales',
+    desc: 'No ves perfiles al azar. Ves a las personas que comparten lo que te importa, ahí, en ese evento.',
   },
   {
-    titulo: 'Presencia física + contexto',
+    label: 'Presencia física + contexto',
     desc: 'La conversación ya tiene un punto de partida antes de que digas la primera palabra.',
   },
   {
-    titulo: 'Continuidad con propósito — Nudge',
-    desc: 'La conexión que nació en el evento no muere en la primera semana. Nudge la mantiene viva.',
+    label: 'Nudge — continuidad',
+    desc: 'La conexión que nació en el evento no muere en la primera semana.',
   },
 ]
 
@@ -25,8 +25,7 @@ const fadeUp = {
 export default function LaDiferencia() {
   return (
     <section
-      style={{ position: 'relative', zIndex: 1, minHeight: '100vh', display: 'flex', alignItems: 'center' }}
-      className="py-24 md:py-0"
+      style={{ position: 'relative', zIndex: 1, padding: '60px 0', display: 'flex', alignItems: 'center' }}
     >
       <div style={{ width: '100%', display: 'flex', flexWrap: 'wrap' }}>
 
@@ -51,7 +50,7 @@ export default function LaDiferencia() {
               }}
             >
               <p className="font-display" style={{ color: '#FFF', fontSize: '1rem', fontWeight: 700, lineHeight: 1.35, margin: '0 0 10px' }}>
-                {item.titulo}
+                {item.label}
               </p>
               <p className="font-body" style={{ color: '#555', fontSize: '0.88rem', lineHeight: 1.65, margin: 0 }}>
                 {item.desc}
@@ -98,10 +97,8 @@ export default function LaDiferencia() {
             className="font-body"
             style={{ color: '#666', fontSize: '1rem', lineHeight: 1.8, maxWidth: '400px', margin: 0 }}
           >
-            UConnect conecta personas que ya están
-            en el mismo lugar, con los mismos intereses,
-            en ese momento específico.
-            Eso no existía antes.
+            Conecta a las personas que ya están en el mismo espacio —
+            con contexto, con intención, en el momento correcto.
           </motion.p>
         </div>
 

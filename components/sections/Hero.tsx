@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Mode } from '@/app/page'
+import type { Mode } from '@/app/page'
 
 const GlobeComponent = dynamic(
   () => import('@/components/globe/GlobeComponent'),
@@ -75,7 +75,7 @@ export default function Hero({ mode }: { mode: Mode }) {
         </AnimatePresence>
       </motion.div>
 
-      <motion.h1 className="font-display" style={{ fontWeight: 900, color: '#FFF', lineHeight: 1.05, fontSize: 'clamp(2.8rem, 4.5vw, 5.5rem)', margin: 0 }}>
+      <motion.h1 className="font-display" style={{ fontWeight: 900, color: '#FFF', lineHeight: 1.05, fontSize: 'clamp(2.4rem, 3.8vw, 4.8rem)', margin: 0 }}>
         <motion.span className="block" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}>
           Conectamos{' '}
           <span style={{ position: 'relative', display: 'inline-block', minHeight: '1.1em', minWidth: '220px' }}
@@ -134,10 +134,10 @@ export default function Hero({ mode }: { mode: Mode }) {
   )
 
   return (
-    <section id="hero" style={{ position: 'relative', minHeight: '100vh', display: 'flex', alignItems: 'center', zIndex: 1 }}>
+    <section id="hero" style={{ position: 'relative', minHeight: '90vh', display: 'flex', alignItems: 'center', zIndex: 1 }}>
       {!isMobile ? (
-        <div style={{ display: 'flex', width: '100%', minHeight: '100vh', alignItems: 'center' }}>
-          <div style={{ width: '55%', paddingLeft: '6vw', paddingRight: '2vw', paddingTop: '80px', paddingBottom: '40px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'flex', width: '100%', minHeight: '90vh', alignItems: 'center' }}>
+          <div style={{ width: '55%', paddingLeft: '6vw', paddingRight: '2vw', paddingTop: '80px', paddingBottom: '20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
             {textContent}
           </div>
           <div style={{ width: '45%', height: '100vh', position: 'relative', flexShrink: 0 }}>
